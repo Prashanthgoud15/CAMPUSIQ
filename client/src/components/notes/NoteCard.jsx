@@ -9,7 +9,7 @@ const NoteCard = ({ note, onView, onDownload }) => {
       <div className={`absolute top-0 left-0 right-0 h-1 ${note.is_important ? 'bg-amber-500' : 'bg-gpcet-primary/30 group-hover:bg-gpcet-primary transition-colors'}`}></div>
 
       <div className="flex justify-between items-start mb-3 pt-1">
-        <div className="flex items-center gap-2 text-gpcet-muted text-xs font-medium bg-[#0A0F1E] px-2 py-1 rounded shadow-inner border border-gpcet-border">
+        <div className="flex items-center gap-2 text-gpcet-muted text-xs font-medium bg-gpcet-bg px-2 py-1 rounded shadow-inner border border-gpcet-border">
           <div className="text-red-400 group-hover:scale-110 transition-transform">
             <FileText size={14} />
           </div>
@@ -23,7 +23,7 @@ const NoteCard = ({ note, onView, onDownload }) => {
         )}
       </div>
 
-      <h3 className="text-white font-bold text-sm leading-snug mb-2 line-clamp-2" title={note.title}>
+      <h3 className="text-gpcet-text font-bold text-sm leading-snug mb-2 line-clamp-2" title={note.title}>
         {note.title}
       </h3>
       
@@ -45,7 +45,7 @@ const NoteCard = ({ note, onView, onDownload }) => {
 
         <div className="flex items-center justify-between text-[11px] text-gpcet-muted mb-4 border-t border-gpcet-border/50 pt-3">
           <span className="truncate pr-2 font-medium">By {note.uploaded_by?.display_name || 'Admin'}</span>
-          <span className="shrink-0 font-mono text-gray-400 bg-white/5 px-2 rounded-full">{note.view_count} views</span>
+          <span className="shrink-0 font-mono text-gray-400 bg-gpcet-bg px-2 rounded-full">{note.view_count} views</span>
         </div>
 
         <button 
@@ -57,7 +57,7 @@ const NoteCard = ({ note, onView, onDownload }) => {
 
         <button 
           onClick={(e) => { e.stopPropagation(); onDownload(note); }}
-          className="w-full py-2 rounded-xl border border-white/10 bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white transition-all text-xs font-bold active:scale-95 flex items-center justify-center gap-2"
+          className="w-full py-2 rounded-xl border border-gpcet-border bg-gpcet-bg text-gpcet-muted hover:bg-gpcet-card hover:text-gpcet-text transition-all text-xs font-bold active:scale-95 flex items-center justify-center gap-2"
         >
           <Download size={14} /> Download PDF
         </button>

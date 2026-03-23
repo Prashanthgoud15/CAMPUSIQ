@@ -142,19 +142,19 @@ const Meera = () => {
   };
 
   return (
-    <div className="flex flex-col h-full bg-[#050810] text-gray-200 w-full overflow-hidden">
+    <div className="flex flex-col h-full bg-gpcet-bg text-gpcet-text w-full overflow-hidden">
 
       {/* Top Bar */}
-      <div className="flex items-center justify-between p-4 bg-[#0A0F1E] border-b border-white/10 shrink-0">
+      <div className="flex items-center justify-between p-4 bg-gpcet-navbar border-b border-white/10 shrink-0">
         <div className="flex items-center gap-4">
           <div className="relative">
             <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-violet-600 to-fuchsia-500 animate-[pulse_3s_ease-in-out_infinite] opacity-50 absolute inset-0 blur-md"></div>
-            <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-violet-600 to-fuchsia-500 flex items-center justify-center relative z-10 border-2 border-[#0A0F1E] shadow-[0_0_15px_rgba(139,92,246,0.5)]">
+            <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-violet-600 to-fuchsia-500 flex items-center justify-center relative z-10 border-2 border-gpcet-navbar shadow-[0_0_15px_rgba(139,92,246,0.5)]">
               <Sparkles className="text-white fill-white" size={20} />
             </div>
           </div>
           <div>
-            <h1 className="text-white font-black text-lg tracking-wide">Meera</h1>
+            <h1 className="text-gpcet-text font-black text-lg tracking-wide">Meera</h1>
             <p className="text-gpcet-muted text-[11px] font-mono tracking-wider uppercase">Powered by  Prashanth &bull; llama-3.3-70b</p>
           </div>
         </div>
@@ -168,7 +168,7 @@ const Meera = () => {
       </div>
 
       {/* Mode Selector */}
-      <div className="flex gap-2 p-3 bg-[#050810] border-b border-gpcet-border shrink-0 overflow-x-auto custom-scrollbar shadow-inner">
+      <div className="flex gap-2 p-3 bg-gpcet-bg border-b border-gpcet-border shrink-0 overflow-x-auto custom-scrollbar shadow-inner">
         {MODES.map(mode => (
           <button
             key={mode.id}
@@ -185,9 +185,9 @@ const Meera = () => {
       </div>
 
       {/* Context Bar */}
-      <div className="py-3 px-4 sm:px-6 bg-[#0A0F1E]/50 border-b border-gpcet-border shrink-0">
+      <div className="py-3 px-4 sm:px-6 bg-gpcet-navbar/50 border-b border-gpcet-border shrink-0">
         <div className="flex flex-col sm:flex-row gap-3">
-          <div className="flex-1 flex gap-2 items-center bg-[#111827] border border-gpcet-border rounded-xl px-3 py-1.5 shadow-inner focus-within:border-gpcet-accent transition-colors">
+          <div className="flex-1 flex gap-2 items-center bg-gpcet-card border border-gpcet-border rounded-xl px-3 py-1.5 shadow-inner focus-within:border-gpcet-accent transition-colors">
             <span className="text-[10px] uppercase font-bold text-gray-500 whitespace-nowrap hidden lg:inline">Subject:</span>
             <input
               type="text"
@@ -221,12 +221,12 @@ const Meera = () => {
           <div className="flex flex-col items-center justify-center min-h-[50vh] text-center max-w-2xl mx-auto px-4 my-8">
             <div className="relative mb-6 group cursor-pointer" onClick={() => setActiveMode(activeMode === 'exam' ? 'explainer' : 'exam')}>
               <div className="absolute inset-0 bg-gpcet-accent rounded-full blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-700"></div>
-              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#1E1B4B] to-[#111827] flex items-center justify-center relative z-10 border border-gpcet-accent/30 shadow-[0_0_30px_rgba(139,92,246,0.3)] box-glow-accent">
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-indigo-900/40 to-gpcet-card flex items-center justify-center relative z-10 border border-gpcet-accent/30 shadow-[0_0_30px_rgba(139,92,246,0.3)] box-glow-accent">
                 <Bot size={40} className="text-gpcet-accent" />
               </div>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl font-black text-white mb-3 tracking-tight">Namaste! I'm Meera <span className="inline-block hover:animate-bounce origin-bottom">🙏</span></h2>
+            <h2 className="text-3xl sm:text-4xl font-black text-gpcet-text mb-3 tracking-tight">Namaste! I'm Meera <span className="inline-block hover:animate-bounce origin-bottom">🙏</span></h2>
             <p className="text-gpcet-accent font-bold mb-2 uppercase tracking-widest text-xs">Your AI study companion for GPCET</p>
             <p className="text-gray-400 font-medium mb-10 max-w-sm leading-relaxed text-sm">I have been configured to follow your precise R23 syllabus structure. Ask me anything.</p>
 
@@ -235,7 +235,7 @@ const Meera = () => {
                 <button
                   key={idx}
                   onClick={() => handleSubmit(sug)}
-                  className="bg-[#111827] border border-gpcet-border hover:border-gpcet-accent/50 hover:bg-[#1E1B4B]/30 p-3 sm:p-4 rounded-xl text-xs sm:text-sm font-medium text-left text-gray-300 hover:text-indigo-200 transition-all shadow-lg hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(139,92,246,0.15)] flex items-center justify-between group"
+                  className="bg-gpcet-card border border-gpcet-border hover:border-gpcet-accent/50 hover:bg-indigo-900/10 p-3 sm:p-4 rounded-xl text-xs sm:text-sm font-medium text-left text-gpcet-text hover:text-indigo-200 transition-all shadow-lg hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(139,92,246,0.15)] flex items-center justify-between group"
                 >
                   <span className="line-clamp-2">{sug}</span>
                   <Send size={14} className="opacity-0 group-hover:opacity-100 text-gpcet-accent transition-opacity -translate-x-2 group-hover:translate-x-0 transform duration-300 shrink-0 ml-2" />
@@ -257,9 +257,9 @@ const Meera = () => {
                   </div>
                 ) : (
                   <div className="flex flex-col items-start w-full">
-                    <div className="bg-[#111827] border-l-[3px] border-l-gpcet-accent border-y border-r border-[#1F2937] rounded-2xl rounded-tl-sm w-full shadow-xl">
+                    <div className="bg-gpcet-card border-l-[3px] border-l-gpcet-accent border-y border-r border-gpcet-border rounded-2xl rounded-tl-sm w-full shadow-xl">
 
-                      <div className="flex items-center gap-2 px-4 py-2 border-b border-[#1F2937] bg-[#0A0F1E]/50 rounded-tr-2xl">
+                      <div className="flex items-center gap-2 px-4 py-2 border-b border-gpcet-border bg-gpcet-navbar/50 rounded-tr-2xl">
                         <div className="w-5 h-5 rounded-full bg-gradient-to-tr from-violet-600 to-fuchsia-500 flex items-center justify-center shrink-0 shadow-[0_0_10px_rgba(139,92,246,0.5)]">
                           <Sparkles size={10} className="text-white fill-white" />
                         </div>
@@ -273,8 +273,8 @@ const Meera = () => {
                           prose-headings:text-indigo-200 prose-headings:font-black prose-headings:tracking-tight prose-headings:mb-3 prose-headings:mt-6
                           prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline
                           prose-strong:text-indigo-100 prose-strong:font-bold 
-                          prose-code:text-gpcet-accent prose-code:bg-[#050810] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:border prose-code:border-white/5
-                          prose-pre:bg-[#050810] prose-pre:border prose-pre:border-[#1F2937] prose-pre:shadow-inner
+                          prose-code:text-gpcet-accent prose-code:bg-gpcet-bg prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:border prose-code:border-white/5
+                          prose-pre:bg-gpcet-bg prose-pre:border prose-pre:border-gpcet-border prose-pre:shadow-inner
                           prose-li:marker:text-gpcet-accent overflow-hidden break-words">
                         {msg.isTyping ? (
                           <div className="flex items-center gap-3 text-gpcet-accent py-2 min-h-[2rem]">
@@ -293,7 +293,7 @@ const Meera = () => {
 
                     {!msg.isTyping && msg.content && (
                       <div className="flex items-center gap-1 mt-2 pl-2">
-                        <button onClick={() => handleCopy(msg.content)} className="p-1.5 text-gray-500 hover:text-white hover:bg-[#111827] border border-transparent hover:border-gray-700 rounded-lg transition-colors tooltip-trigger flex items-center gap-1.5 text-xs font-medium bg-transparent" title="Copy to clipboard">
+                        <button onClick={() => handleCopy(msg.content)} className="p-1.5 text-gray-500 hover:text-gpcet-text hover:bg-gpcet-card border border-transparent hover:border-gray-700 rounded-lg transition-colors tooltip-trigger flex items-center gap-1.5 text-xs font-medium bg-transparent" title="Copy to clipboard">
                           <Copy size={14} /> Copy
                         </button>
                         <button className="p-1.5 text-gray-500 hover:text-green-400 hover:bg-green-500/10 border border-transparent hover:border-green-500/20 rounded-lg transition-colors ml-2" title="Helpful response">
@@ -314,8 +314,8 @@ const Meera = () => {
       </div>
 
       {/* Input Area */}
-      <div className="bg-[#0A0F1E] border-t border-gpcet-border shrink-0 p-3 sm:p-4 shadow-[0_-10px_30px_rgba(0,0,0,0.5)] z-20">
-        <div className="max-w-4xl mx-auto flex items-end gap-3 p-1 rounded-2xl bg-[#050810] border border-gpcet-border shadow-inner focus-within:border-gpcet-accent focus-within:shadow-[0_0_20px_rgba(139,92,246,0.15)] transition-all">
+      <div className="bg-gpcet-navbar border-t border-gpcet-border shrink-0 p-3 sm:p-4 shadow-[0_-10px_30px_rgba(0,0,0,0.5)] z-20">
+        <div className="max-w-4xl mx-auto flex items-end gap-3 p-1 rounded-2xl bg-gpcet-bg border border-gpcet-border shadow-inner focus-within:border-gpcet-accent focus-within:shadow-[0_0_20px_rgba(139,92,246,0.15)] transition-all">
           <textarea
             ref={textareaRef}
             value={inputVal}
@@ -325,7 +325,7 @@ const Meera = () => {
             }}
             onKeyDown={handleKeyDown}
             placeholder="Ask Meera anything about your GPCET syllabus... (Shift+Enter for newline)"
-            className="flex-1 max-h-32 min-h-[44px] bg-transparent resize-none outline-none text-white p-3 custom-scrollbar text-base placeholder-gray-600 leading-relaxed"
+            className="flex-1 max-h-32 min-h-[44px] bg-transparent resize-none outline-none text-gpcet-text p-3 custom-scrollbar text-base placeholder-gray-600 leading-relaxed"
             rows={1}
             disabled={isStreaming}
           />

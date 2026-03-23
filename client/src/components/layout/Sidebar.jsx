@@ -22,18 +22,18 @@ const Sidebar = () => {
     `flex items-center gap-3 px-4 py-3 mx-2 my-1 rounded-lg transition-all ${
       isActive
         ? 'bg-blue-500/10 text-blue-400 border-l-4 border-blue-500'
-        : 'text-gray-400 hover:bg-[#1F2937] hover:text-white border-l-4 border-transparent'
+        : 'text-gpcet-muted hover:bg-gpcet-bg hover:text-gpcet-text border-l-4 border-transparent'
     }`;
 
   const adminNavClass = ({ isActive }) =>
     `flex items-center gap-3 px-4 py-3 mx-2 my-1 rounded-lg transition-all ${
       isActive
         ? 'bg-amber-500/10 text-amber-400 border-l-4 border-amber-500'
-        : 'text-gray-400 hover:bg-[#1F2937] hover:text-white border-l-4 border-transparent'
+        : 'text-gpcet-muted hover:bg-gpcet-bg hover:text-gpcet-text border-l-4 border-transparent'
     }`;
 
   return (
-    <div className="h-full flex flex-col justify-between bg-[#111827]">
+    <div className="h-full flex flex-col justify-between bg-gpcet-sidebar">
       <div>
         {/* Top Section */}
         <div className="p-6 pb-4">
@@ -48,7 +48,7 @@ const Sidebar = () => {
         {/* User Info Card */}
         {user?.role === 'student' ? (
           <div className="px-4 mb-6">
-            <div className="flex items-center gap-3 p-3 bg-[#0A0F1E] rounded-xl border border-gpcet-border">
+            <div className="flex items-center gap-3 p-3 bg-gpcet-bg rounded-xl border border-gpcet-border">
               <div className="w-10 h-10 rounded-full bg-gpcet-primary flex items-center justify-center text-white font-bold text-sm shrink-0 shadow-inner">
                 {user?.avatar_initials}
               </div>
@@ -66,7 +66,7 @@ const Sidebar = () => {
           </div>
         ) : (
           <div className="px-4 mb-6">
-            <div className="flex items-center gap-3 p-3 bg-[#0A0F1E] rounded-xl border border-gpcet-border">
+            <div className="flex items-center gap-3 p-3 bg-gpcet-bg rounded-xl border border-gpcet-border">
               <div className="w-10 h-10 rounded-full bg-gpcet-accent flex items-center justify-center text-white font-bold text-sm shrink-0 shadow-inner">
                 AD
               </div>

@@ -140,12 +140,12 @@ const AdminUpload = () => {
 
   return (
     <div className="max-w-4xl mx-auto pb-12">
-      <div className="mb-8 p-8 bg-[#111827] rounded-3xl border border-gpcet-border shadow-xl relative overflow-hidden">
+      <div className="mb-8 p-8 bg-gpcet-card rounded-3xl border border-gpcet-border shadow-xl relative overflow-hidden">
         {/* Glow */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-gpcet-primary opacity-5 blur-3xl rounded-full"></div>
         
         <div className="relative z-10">
-          <h1 className="text-3xl font-black text-white mb-2 tracking-tight">Upload Study Material</h1>
+          <h1 className="text-3xl font-black text-gpcet-text mb-2 tracking-tight">Upload Study Material</h1>
           <p className="text-gpcet-muted font-medium text-sm">Materials will be visible to students instantly after upload.</p>
         </div>
 
@@ -154,19 +154,19 @@ const AdminUpload = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
               <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Branch</label>
-              <select value={branch} onChange={(e) => setBranch(e.target.value)} className="w-full bg-[#0A0F1E] border border-gpcet-border rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-gpcet-primary outline-none font-medium shadow-inner transition-shadow">
+              <select value={branch} onChange={(e) => setBranch(e.target.value)} className="w-full bg-gpcet-bg border border-gpcet-border rounded-xl px-4 py-3 text-gpcet-text focus:ring-2 focus:ring-gpcet-primary outline-none font-medium shadow-inner transition-shadow">
                 {BRANCHES.map(b => <option key={b.code} value={b.code}>{b.code}</option>)}
               </select>
             </div>
             <div>
               <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Year</label>
-              <select value={year} onChange={(e) => setYear(e.target.value)} className="w-full bg-[#0A0F1E] border border-gpcet-border rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-gpcet-primary outline-none font-medium shadow-inner transition-shadow">
+              <select value={year} onChange={(e) => setYear(e.target.value)} className="w-full bg-gpcet-bg border border-gpcet-border rounded-xl px-4 py-3 text-gpcet-text focus:ring-2 focus:ring-gpcet-primary outline-none font-medium shadow-inner transition-shadow">
                 {[1,2,3,4].map(y => <option key={y} value={y}>{y}{y===1?'st':y===2?'nd':y===3?'rd':'th'} Year</option>)}
               </select>
             </div>
             <div>
               <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Semester</label>
-              <select value={semester} onChange={(e) => setSemester(e.target.value)} className="w-full bg-[#0A0F1E] border border-gpcet-border rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-gpcet-primary outline-none font-medium shadow-inner transition-shadow">
+              <select value={semester} onChange={(e) => setSemester(e.target.value)} className="w-full bg-gpcet-bg border border-gpcet-border rounded-xl px-4 py-3 text-gpcet-text focus:ring-2 focus:ring-gpcet-primary outline-none font-medium shadow-inner transition-shadow">
                 <option value="1">Semester 1</option>
                 <option value="2">Semester 2</option>
               </select>
@@ -179,7 +179,7 @@ const AdminUpload = () => {
               <select 
                 value={selectedSubjectCode} 
                 onChange={(e) => setSelectedSubjectCode(e.target.value)} 
-                className="w-full bg-[#0A0F1E] border border-gpcet-border rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-gpcet-primary outline-none font-medium shadow-inner transition-shadow"
+                className="w-full bg-gpcet-bg border border-gpcet-border rounded-xl px-4 py-3 text-gpcet-text focus:ring-2 focus:ring-gpcet-primary outline-none font-medium shadow-inner transition-shadow"
                 disabled={subjects.length === 0}
               >
                 {subjects.map(s => <option key={s.subject_code} value={s.subject_code}>{s.subject_name} ({s.subject_code})</option>)}
@@ -190,7 +190,7 @@ const AdminUpload = () => {
               <select 
                 value={unitLabel} 
                 onChange={(e) => setUnitLabel(e.target.value)} 
-                className="w-full bg-[#0A0F1E] border border-gpcet-border rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-gpcet-primary outline-none font-medium shadow-inner transition-shadow"
+                className="w-full bg-gpcet-bg border border-gpcet-border rounded-xl px-4 py-3 text-gpcet-text focus:ring-2 focus:ring-gpcet-primary outline-none font-medium shadow-inner transition-shadow"
               >
                 {getUnitOptions().map(opt => <option key={opt} value={opt}>{opt}</option>)}
               </select>
@@ -207,7 +207,7 @@ const AdminUpload = () => {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g. OS Unit 3 - Process Scheduling Notes"
-              className="w-full bg-[#0A0F1E] border border-gpcet-border rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-gpcet-primary outline-none font-medium shadow-inner transition-shadow"
+              className="w-full bg-gpcet-bg border border-gpcet-border rounded-xl px-4 py-3 text-gpcet-text focus:ring-2 focus:ring-gpcet-primary outline-none font-medium shadow-inner transition-shadow"
             />
           </div>
 
@@ -233,7 +233,7 @@ const AdminUpload = () => {
             />
           </div>
 
-          <div className="bg-[#0A0F1E] rounded-xl p-4 border border-amber-500/20 flex flex-col gap-4">
+          <div className="bg-gpcet-bg rounded-xl p-4 border border-amber-500/20 flex flex-col gap-4">
             <label className="flex items-center cursor-pointer group">
               <div className="relative">
                 <input 
@@ -254,7 +254,7 @@ const AdminUpload = () => {
                 value={importantMessage}
                 onChange={(e) => setImportantMessage(e.target.value)}
                 placeholder="Important message to students (optional)"
-                className="w-full bg-[#111827] border border-amber-500/30 rounded-xl px-4 py-2.5 text-white focus:ring-2 focus:ring-amber-500 outline-none text-sm placeholder-amber-500/30"
+                className="w-full bg-gpcet-card border border-amber-500/30 rounded-xl px-4 py-2.5 text-gpcet-text focus:ring-2 focus:ring-amber-500 outline-none text-sm placeholder-amber-500/30"
               />
             )}
           </div>
@@ -262,7 +262,7 @@ const AdminUpload = () => {
           <div 
             onDragOver={(e) => e.preventDefault()}
             onDrop={handleFileDrop}
-            className={`border-2 border-dashed rounded-2xl p-8 flex flex-col items-center justify-center text-center transition-colors cursor-pointer relative bg-[#0A0F1E]/50 ${
+            className={`border-2 border-dashed rounded-2xl p-8 flex flex-col items-center justify-center text-center transition-colors cursor-pointer relative bg-gpcet-bg/50 ${
               file ? 'border-green-500/50 bg-green-500/5' : 'border-gpcet-border hover:border-gpcet-primary/50'
             }`}
           >
@@ -306,13 +306,13 @@ const AdminUpload = () => {
       </div>
 
       <div className="mb-6 flex items-center justify-between px-2">
-        <h2 className="text-xl font-bold text-white">Recent Uploads</h2>
+        <h2 className="text-xl font-bold text-gpcet-text">Recent Uploads</h2>
       </div>
 
-      <div className="bg-[#111827] rounded-3xl border border-gpcet-border overflow-hidden shadow-xl">
+      <div className="bg-gpcet-card rounded-3xl border border-gpcet-border overflow-hidden shadow-xl">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
-            <thead className="bg-[#0A0F1E] border-b border-gpcet-border text-xs uppercase text-gpcet-muted font-bold tracking-wider">
+            <thead className="bg-gpcet-bg border-b border-gpcet-border text-xs uppercase text-gpcet-muted font-bold tracking-wider">
               <tr>
                 <th className="px-6 py-4">Subject</th>
                 <th className="px-6 py-4">Unit/Week</th>
@@ -321,16 +321,16 @@ const AdminUpload = () => {
                 <th className="px-6 py-4">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gpcet-border bg-[#111827]">
+            <tbody className="divide-y divide-gpcet-border bg-gpcet-card">
               {recentNotes.length === 0 ? (
                 <tr>
-                  <td colSpan="5" className="px-6 py-8 text-center text-gpcet-muted font-medium bg-[#0A0F1E]/30">No recent uploads found.</td>
+                  <td colSpan="5" className="px-6 py-8 text-center text-gpcet-muted font-medium bg-gpcet-bg/30">No recent uploads found.</td>
                 </tr>
               ) : (
                 recentNotes.map(note => (
                   <tr key={note._id} className="hover:bg-white/5 transition-colors">
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="font-bold text-white">{note.subject_code}</div>
+                      <div className="font-bold text-gpcet-text">{note.subject_code}</div>
                       <div className="text-[10px] text-gpcet-muted mt-0.5">{note.regulation} &bull; {note.branch}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
@@ -341,7 +341,7 @@ const AdminUpload = () => {
                       <div className="text-[10px] flex items-center gap-1 text-gray-500 mt-1"><Clock size={10} /> {new Date(note.created_at).toLocaleDateString()}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="font-mono text-xs bg-[#0A0F1E] px-2 py-1 rounded border border-gpcet-border shadow-inner">{note.view_count}</span>
+                      <span className="font-mono text-xs bg-gpcet-bg px-2 py-1 rounded border border-gpcet-border shadow-inner">{note.view_count}</span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <button 

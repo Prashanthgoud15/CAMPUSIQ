@@ -60,6 +60,91 @@ exports.login = async (req, res) => {
   }
 };
 
+exports.register = async (req, res) => {
+  try {
+    const { display_name, email, password, roll_number, branch, year, semester } = req.body;
+
+    // Check if email already exists
+    const existingEmail = await User.findOne({ email });
+    if (existingEmail) {
+      return res.status(400).json({ message: 'Email already registered' });
+    }
+
+    // Check if roll number already exists
+    const existingRoll = await User.findOne({ roll_number: roll_number.toUpperCase() });
+    if (existingRoll) {
+      return res.status(400).json({ message: 'Roll number already registered' });
+    }
+
+    // Hash password
+    const salt = await bcrypt.genSalt(12);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    // Create user
+    const newUser = await User.create({
+      display_name,
+      email,
+      password: hashedPassword,
+      roll_number: roll_number.toUpperCase(),
+      branch,
+      year: parseInt(year),
+      semester: parseInt(semester),
+      role: 'student',
+      regulation: 'R23'
+    });
+
+    // Generate tokens (Same as login)
+    const payload = {
+      userId: newUser._id,
+      role: newUser.role,
+      branch: newUser.branch,
+      year: newUser.year,
+      semester: newUser.semester,
+      regulation: newUser.regulation,
+      display_name: newUser.display_name,
+      roll_number: newUser.roll_number
+    };
+
+    const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_SECRET, { 
+      expiresIn: process.env.JWT_ACCESS_EXPIRES || '15m' 
+    });
+    
+    const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_SECRET, { 
+      expiresIn: process.env.JWT_REFRESH_EXPIRES || '7d' 
+    });
+
+    res.cookie('refreshToken', refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 7 * 24 * 60 * 60 * 1000
+    });
+
+    await Session.create({
+      user_id: newUser._id,
+      action_type: 'login' // Registration counts as first login
+    });
+
+    res.status(201).json({
+      accessToken,
+      user: {
+        id: newUser._id,
+        display_name: newUser.display_name,
+        avatar_initials: newUser.avatar_initials,
+        role: newUser.role,
+        branch: newUser.branch,
+        year: newUser.year,
+        semester: newUser.semester,
+        regulation: newUser.regulation,
+        roll_number: newUser.roll_number
+      }
+    });
+
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
 exports.logout = (req, res) => {
   res.clearCookie('refreshToken');
   res.json({ message: 'Logged out successfully' });

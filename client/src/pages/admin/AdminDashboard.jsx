@@ -40,7 +40,7 @@ const AdminDashboard = () => {
         {cards.map((card, idx) => (
           <div 
             key={idx}
-            className="group bg-[#111827] rounded-3xl border border-gpcet-border p-8 hover:border-gpcet-primary/50 transition-all hover:-translate-y-1 shadow-xl flex flex-col h-full"
+            className="group bg-gpcet-card rounded-3xl border border-gpcet-border p-8 hover:border-gpcet-primary/50 transition-all hover:-translate-y-1 shadow-xl flex flex-col h-full"
           >
             <div className={`w-14 h-14 rounded-2xl ${card.color} flex items-center justify-center mb-6 shadow-inner`}>
               {card.icon}
@@ -59,11 +59,11 @@ const AdminDashboard = () => {
       </div>
 
       <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-[#0A0F1E] rounded-3xl border border-gpcet-border p-8 border-dashed flex flex-col items-center justify-center text-center opacity-60">
+        <div className="bg-gpcet-bg rounded-3xl border border-gpcet-border p-8 border-dashed flex flex-col items-center justify-center text-center opacity-60">
            <Users size={32} className="text-gpcet-muted mb-4" />
            <p className="text-sm font-medium text-gpcet-muted italic">User management features coming soon...</p>
         </div>
-        <div className="bg-[#0A0F1E] rounded-3xl border border-gpcet-border p-8 border-dashed flex flex-col items-center justify-center text-center opacity-60">
+        <div className="bg-gpcet-bg rounded-3xl border border-gpcet-border p-8 border-dashed flex flex-col items-center justify-center text-center opacity-60">
            <Settings size={32} className="text-gpcet-muted mb-4" />
            <p className="text-sm font-medium text-gpcet-muted italic">System configurations coming soon...</p>
         </div>

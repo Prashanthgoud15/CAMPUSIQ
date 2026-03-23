@@ -55,7 +55,7 @@ const AdminNotes = () => {
     <div className="max-w-7xl mx-auto p-4 sm:p-8">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
         <div>
-          <h1 className="text-3xl font-black text-white mb-2">Manage All Notes</h1>
+          <h1 className="text-3xl font-black text-gpcet-text mb-2">Manage All Notes</h1>
           <p className="text-gpcet-muted font-medium">Review, search, and manage student study materials.</p>
         </div>
         
@@ -67,14 +67,14 @@ const AdminNotes = () => {
                placeholder="Search by title or code..." 
                value={searchTerm}
                onChange={(e) => setSearchTerm(e.target.value)}
-               className="bg-[#111827] border border-gpcet-border rounded-xl pl-10 pr-4 py-2.5 text-sm text-white focus:ring-2 focus:ring-gpcet-primary outline-none w-64 shadow-inner"
+               className="bg-gpcet-card border border-gpcet-border rounded-xl pl-10 pr-4 py-2.5 text-sm text-gpcet-text focus:ring-2 focus:ring-gpcet-primary outline-none w-64 shadow-inner"
              />
            </div>
            
            <select 
              value={statusFilter}
              onChange={(e) => setStatusFilter(e.target.value)}
-             className="bg-[#111827] border border-gpcet-border rounded-xl px-4 py-2.5 text-sm text-white focus:ring-2 focus:ring-gpcet-primary outline-none shadow-inner"
+             className="bg-gpcet-card border border-gpcet-border rounded-xl px-4 py-2.5 text-sm text-gpcet-text focus:ring-2 focus:ring-gpcet-primary outline-none shadow-inner"
            >
              <option value="all">All Notes</option>
              <option value="important">Important Only</option>
@@ -82,10 +82,10 @@ const AdminNotes = () => {
         </div>
       </div>
 
-      <div className="bg-[#111827] rounded-3xl border border-gpcet-border overflow-hidden shadow-2xl">
+      <div className="bg-gpcet-card rounded-3xl border border-gpcet-border overflow-hidden shadow-2xl">
         <div className="overflow-x-auto">
           <table className="w-full text-left">
-            <thead className="bg-[#0A0F1E] border-b border-gpcet-border">
+            <thead className="bg-gpcet-bg border-b border-gpcet-border">
               <tr>
                 <th className="px-6 py-4 text-xs font-black uppercase tracking-widest text-gpcet-muted">Content</th>
                 <th className="px-6 py-4 text-xs font-black uppercase tracking-widest text-gpcet-muted">Context</th>
@@ -111,14 +111,14 @@ const AdminNotes = () => {
                           <FileText size={20} />
                         </div>
                         <div className="overflow-hidden">
-                          <p className="text-white font-bold text-sm truncate max-w-xs">{note.title}</p>
+                          <p className="text-gpcet-text font-bold text-sm truncate max-w-xs">{note.title}</p>
                           <p className="text-gpcet-muted text-[11px] mt-0.5 truncate">{note.unit_label}</p>
                         </div>
                       </div>
                     </td>
                     <td className="px-6 py-5">
                       <div className="space-y-1">
-                        <span className="bg-[#0A0F1E] px-2 py-0.5 rounded text-[10px] font-mono text-gpcet-primary border border-gpcet-primary/20">{note.subject_code}</span>
+                        <span className="bg-gpcet-bg px-2 py-0.5 rounded text-[10px] font-mono text-gpcet-primary border border-gpcet-primary/20">{note.subject_code}</span>
                         <div className="text-[10px] text-gray-500 font-medium">{note.branch} &bull; {note.regulation}</div>
                       </div>
                     </td>

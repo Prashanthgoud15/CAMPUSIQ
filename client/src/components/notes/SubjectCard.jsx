@@ -23,18 +23,18 @@ const SubjectCard = ({ subject }) => {
           {getTypeIcon()}
           {typeConfig.label}
         </span>
-        <span className="text-[11px] font-mono font-medium text-gray-500 bg-[#0A0F1E] px-2 py-0.5 rounded border border-gpcet-border shadow-inner">
+        <span className="text-[11px] font-mono font-medium text-gray-500 bg-gpcet-bg px-2 py-0.5 rounded border border-gpcet-border shadow-inner">
           {subject.subject_code}
         </span>
       </div>
 
-      <h3 className="text-white font-bold text-base leading-tight mb-2 line-clamp-2" title={subject.subject_name}>
+      <h3 className="text-gpcet-text font-bold text-base leading-tight mb-2 line-clamp-2" title={subject.subject_name}>
         {subject.subject_name}
       </h3>
 
       <div className="mt-auto pt-4 space-y-3">
         <div className="flex items-center gap-2">
-          <span className="text-xs font-medium text-gpcet-muted bg-[#0A0F1E] px-2 py-1 rounded border border-gpcet-border shadow-inner">
+          <span className="text-xs font-medium text-gpcet-muted bg-gpcet-bg px-2 py-1 rounded border border-gpcet-border shadow-inner">
             {subject.credits} Credits
           </span>
           {subject.type === 'nptel' && subject.nptel_course_url && (

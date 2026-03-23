@@ -44,13 +44,13 @@ const PDFViewer = ({ note, onClose }) => {
   return (
     <div className="fixed inset-0 z-50 bg-[#000000f2] flex flex-col font-sans backdrop-blur-md">
       {/* Topbar */}
-      <div className="h-16 bg-[#0A0F1E] border-b border-gpcet-border flex items-center justify-between px-6 shrink-0 shadow-xl">
+      <div className="h-16 bg-gpcet-navbar border-b border-gpcet-border flex items-center justify-between px-6 shrink-0 shadow-xl">
         <div className="flex flex-1 items-center gap-4 truncate mr-4">
           <button onClick={onClose} className="text-gray-400 hover:text-white transition-colors bg-white/5 p-2 rounded-xl hover:bg-red-500/20 hover:text-red-400 group shrink-0">
             <X size={20} className="group-hover:scale-110 transition-transform" />
           </button>
           <div className="overflow-hidden">
-            <h3 className="text-white font-bold truncate text-sm sm:text-base">{note.title}</h3>
+            <h3 className="text-gpcet-text font-bold truncate text-sm sm:text-base">{note.title}</h3>
             <p className="text-gray-400 text-[11px] flex items-center gap-2 mt-0.5">
               <span className="text-gpcet-primary font-mono bg-blue-500/10 px-1.5 py-0.5 rounded">{note.subject_code}</span>
               <span>{note.unit_label}</span>

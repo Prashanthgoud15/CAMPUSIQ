@@ -13,7 +13,7 @@ const Layout = () => {
   }, [location.pathname, location.search]);
 
   return (
-    <div className="flex h-screen bg-[#050810] overflow-hidden">
+    <div className="flex h-screen bg-gpcet-bg overflow-hidden">
       {/* Mobile Overlay */}
       {isMobileMenuOpen && (
         <div 
@@ -30,7 +30,7 @@ const Layout = () => {
       {/* Main Content */}
       <div className="flex-1 flex flex-col min-w-0 transition-all duration-300">
         {/* Navbar Wrapper */}
-        <div className="h-16 shrink-0 flex items-center bg-[#0A0F1E] border-b border-gpcet-border lg:hidden px-4 shadow-xl z-20">
+        <div className="h-16 shrink-0 flex items-center bg-gpcet-navbar border-b border-gpcet-border lg:hidden px-4 shadow-xl z-20">
            <button 
              onClick={() => setIsMobileMenuOpen(true)}
              className="p-2 mr-3 text-gpcet-muted hover:text-white bg-white/5 rounded-lg transition-colors border border-white/10"

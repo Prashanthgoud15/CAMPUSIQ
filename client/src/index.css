@@ -2,8 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --gpcet-bg: #F8FAFC;
+  --gpcet-card: #FFFFFF;
+  --gpcet-border: #E2E8F0;
+  --gpcet-text: #0F172A;
+  --gpcet-muted: #64748B;
+  --gpcet-navbar: #FFFFFF;
+  --gpcet-sidebar: #F1F5F9;
+}
+
+html.dark {
+  --gpcet-bg: #0A0F1E;
+  --gpcet-card: #111827;
+  --gpcet-border: #1F2937;
+  --gpcet-text: #F9FAFB;
+  --gpcet-muted: #9CA3AF;
+  --gpcet-navbar: #0A0F1E;
+  --gpcet-sidebar: #111827;
+}
+
 @layer base {
   body {
-    @apply bg-[#0A0F1E] text-[#F9FAFB] font-sans antialiased;
+    background-color: var(--gpcet-bg);
+    color: var(--gpcet-text);
+    @apply font-sans antialiased transition-colors duration-200;
   }
 }

@@ -112,8 +112,8 @@ const Notes = () => {
         onClick={() => handleSelectSubject(s)}
         className={`w-full text-left p-3 rounded-xl mb-2 transition-all border ${
           selectedSubject?.subject_code === s.subject_code
-            ? 'bg-blue-500/10 border-blue-500/40 text-white shadow-[0_0_15px_rgba(59,130,246,0.1)]'
-            : 'bg-transparent border-transparent text-gpcet-muted hover:bg-white/5 hover:text-gray-200'
+            ? 'bg-blue-500/10 border-blue-500/40 text-gpcet-text shadow-[0_0_15px_rgba(59,130,246,0.1)]'
+            : 'bg-transparent border-transparent text-gpcet-muted hover:bg-gpcet-card hover:text-gpcet-text'
         }`}
       >
         <div className="flex items-center gap-2 mb-1">
@@ -135,14 +135,14 @@ const Notes = () => {
     ))
   );
 
-  if (user?.role === 'admin') return <div className="p-4 text-white">Admins use the All Notes panel.</div>;
+  if (user?.role === 'admin') return <div className="p-4 text-gpcet-text">Admins use the All Notes panel.</div>;
 
   return (
     <div className="flex flex-col md:flex-row h-auto min-h-full md:h-full gap-6 pb-6 p-4 md:p-0">
       
       {/* Left Panel */}
-      <div className="w-full md:w-[280px] shrink-0 flex flex-col bg-[#111827] rounded-3xl border border-gpcet-border overflow-hidden shadow-lg h-[250px] md:h-[calc(100vh-120px)]">
-        <div className="p-5 border-b border-gpcet-border bg-[#0A0F1E]">
+      <div className="w-full md:w-[280px] shrink-0 flex flex-col bg-gpcet-card rounded-3xl border border-gpcet-border overflow-hidden shadow-lg h-[250px] md:h-[calc(100vh-120px)]">
+        <div className="p-5 border-b border-gpcet-border bg-gpcet-bg">
           <h2 className="text-xs uppercase font-black text-gpcet-muted tracking-widest">Your Subjects</h2>
         </div>
         
@@ -183,10 +183,10 @@ const Notes = () => {
         {!selectedSubject ? (
           <EmptyState message="Select a subject from the left panel to view its modules and modules." />
         ) : (
-          <div className="flex flex-col h-full bg-[#111827] rounded-3xl border border-gpcet-border overflow-hidden shadow-lg relative">
+          <div className="flex flex-col h-full bg-gpcet-card rounded-3xl border border-gpcet-border overflow-hidden shadow-lg relative">
             
             {/* Header info */}
-            <div className="p-6 sm:p-8 border-b border-gpcet-border bg-[#0A0F1E] relative overflow-hidden shrink-0">
+            <div className="p-6 sm:p-8 border-b border-gpcet-border bg-gpcet-bg relative overflow-hidden shrink-0">
               <div className={`absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl opacity-10 -mr-20 -mt-20 ${
                 selectedSubject.type === 'nptel' ? 'bg-green-500' : 'bg-gpcet-primary'
               }`}></div>
@@ -194,14 +194,14 @@ const Notes = () => {
               <div className="relative z-10 flex flex-col sm:flex-row justify-between gap-4 items-start sm:items-center">
                 <div>
                   <div className="flex items-center gap-2 mb-3">
-                    <span className="font-mono text-xs font-bold text-gray-400 bg-[#111827] border border-gpcet-border px-2 py-0.5 rounded shadow-inner">
+                    <span className="font-mono text-xs font-bold text-gray-400 bg-gpcet-card border border-gpcet-border px-2 py-0.5 rounded shadow-inner">
                       {selectedSubject.subject_code}
                     </span>
-                    <span className="text-xs font-bold uppercase tracking-wide text-gpcet-muted bg-[#111827] border border-gpcet-border px-2 py-0.5 rounded shadow-inner">
+                    <span className="text-xs font-bold uppercase tracking-wide text-gpcet-muted bg-gpcet-card border border-gpcet-border px-2 py-0.5 rounded shadow-inner">
                       {selectedSubject.credits} Credits
                     </span>
                   </div>
-                  <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight leading-tight">
+                  <h2 className="text-2xl sm:text-3xl font-black text-gpcet-text tracking-tight leading-tight">
                     {selectedSubject.subject_name}
                   </h2>
                 </div>
@@ -217,7 +217,7 @@ const Notes = () => {
                   )}
                   <button 
                     onClick={() => navigate(`/meera?subject=${selectedSubject.subject_code}&name=${encodeURIComponent(selectedSubject.subject_name)}`)}
-                    className="flex items-center justify-center gap-2 bg-gradient-to-r from-gpcet-accent/10 to-[#111827] border border-gpcet-accent/30 hover:border-gpcet-accent/60 text-gpcet-accent hover:text-indigo-300 px-4 py-2.5 rounded-xl text-sm font-bold transition-all shadow-[0_0_15px_rgba(139,92,246,0.15)] hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] box-glow-accent"
+                    className="flex items-center justify-center gap-2 bg-gradient-to-r from-gpcet-accent/10 to-gpcet-card border border-gpcet-accent/30 hover:border-gpcet-accent/60 text-gpcet-accent hover:text-indigo-300 px-4 py-2.5 rounded-xl text-sm font-bold transition-all shadow-[0_0_15px_rgba(139,92,246,0.15)] hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] box-glow-accent"
                   >
                     <Bot size={16} /> Ask Meera
                   </button>
@@ -226,7 +226,7 @@ const Notes = () => {
             </div>
 
             {/* Tabs */}
-            <div className="px-6 py-4 border-b border-gpcet-border bg-[#0A0F1E] shrink-0 overflow-x-auto custom-scrollbar shadow-inner">
+            <div className="px-6 py-4 border-b border-gpcet-border bg-gpcet-bg shrink-0 overflow-x-auto custom-scrollbar shadow-inner">
               <div className="flex gap-2 whitespace-nowrap">
                 {getTabsForType(selectedSubject.type).map(tab => {
                   let activeClass = 'bg-gpcet-primary text-white shadow-[0_0_15px_rgba(59,130,246,0.4)] border-gpcet-primary/80';
@@ -240,7 +240,7 @@ const Notes = () => {
                       className={`px-5 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-all border shadow-inner ${
                         activeTab === tab 
                           ? activeClass 
-                          : 'bg-[#111827] border-gpcet-border text-gpcet-muted hover:bg-white/5 hover:text-white'
+                          : 'bg-gpcet-card border-gpcet-border text-gpcet-muted hover:bg-gpcet-bg hover:text-gpcet-text'
                       }`}
                     >
                       {tab}
@@ -251,7 +251,7 @@ const Notes = () => {
             </div>
 
             {/* Notes Grid */}
-            <div className="p-4 sm:p-6 overflow-y-auto flex-1 custom-scrollbar relative bg-[#0A0F1E]/50">
+            <div className="p-4 sm:p-6 overflow-y-auto flex-1 custom-scrollbar relative bg-gpcet-bg/50">
               {isLoadingNotes ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-6">
                   {[...Array(3)].map((_, i) => <SkeletonCard key={i} />)}

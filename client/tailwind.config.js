@@ -9,17 +9,19 @@ export default {
     extend: {
       colors: {
         gpcet: {
-          bg: '#0A0F1E',
-          card: '#111827',
-          border: '#1F2937',
+          bg: 'var(--gpcet-bg)',
+          card: 'var(--gpcet-card)',
+          border: 'var(--gpcet-border)',
           primary: '#3B82F6',
           secondary: '#10B981',
           accent: '#8B5CF6',
           nptel: '#059669',
           warning: '#F59E0B',
           danger: '#EF4444',
-          text: '#F9FAFB',
-          muted: '#9CA3AF'
+          text: 'var(--gpcet-text)',
+          muted: 'var(--gpcet-muted)',
+          navbar: 'var(--gpcet-navbar)',
+          sidebar: 'var(--gpcet-sidebar)'
         }
       },
       fontFamily: {
