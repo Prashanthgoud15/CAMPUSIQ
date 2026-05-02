@@ -6,6 +6,7 @@ const authorize = require('../middleware/authorize');
 const upload = require('../middleware/uploadMiddleware');
 
 router.get('/', authenticate, notesController.getNotes);
+router.get('/browse', authenticate, notesController.browseNotes);
 router.get('/:id/proxy', authenticate, notesController.proxyPdf);
 router.post('/:id/view', authenticate, notesController.viewNote);
 

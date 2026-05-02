@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, BookOpen, Bot, LogOut, Upload, Grid } from 'lucide-react';
+import { LayoutDashboard, BookOpen, Bot, LogOut, Upload, Grid, BookMarked, Settings2 } from 'lucide-react';
 import { AuthContext } from '../../context/AuthContext';
 import { logout as logoutService } from '../../services/authService';
 
@@ -94,6 +94,10 @@ const Sidebar = () => {
                 <Bot size={18} className="text-gpcet-accent" />
                 <span className="font-medium text-sm">Ask Meera</span>
               </NavLink>
+              <NavLink to="/settings" className={navItemClass}>
+                <Settings2 size={18} />
+                <span className="font-medium text-sm">Settings</span>
+              </NavLink>
             </>
           ) : (
             <>
@@ -104,6 +108,10 @@ const Sidebar = () => {
               <NavLink to="/admin/upload" className={adminNavClass}>
                 <Upload size={18} />
                 <span className="font-medium text-sm">Upload Notes</span>
+              </NavLink>
+              <NavLink to="/admin/subjects" className={adminNavClass}>
+                <BookMarked size={18} />
+                <span className="font-medium text-sm">Subjects</span>
               </NavLink>
               <NavLink to="/admin/notes" className={adminNavClass}>
                 <Grid size={18} />

@@ -32,6 +32,7 @@ const Meera = () => {
   const [messages, setMessages] = useState([]);
   const [inputVal, setInputVal] = useState('');
   const [isStreaming, setIsStreaming] = useState(false);
+  const [connectionStatus, setConnectionStatus] = useState('connected'); // connected, slow, offline
 
   const messagesEndRef = useRef(null);
   const textareaRef = useRef(null);
@@ -83,6 +84,7 @@ const Meera = () => {
     if (textareaRef.current) textareaRef.current.style.height = 'auto';
 
     setIsStreaming(true);
+    const startTime = Date.now();
 
     // Create placeholder for Meera's response
     setMessages(prev => [...prev, { role: 'assistant', content: '', isTyping: true }]);
@@ -113,7 +115,15 @@ const Meera = () => {
           });
         } else if (chunk.type === 'done') {
           setIsStreaming(false);
+          const duration = (Date.now() - startTime) / 1000;
+          if (duration > 5) {
+            setConnectionStatus('slow');
+            setTimeout(() => setConnectionStatus('connected'), 10000); // reset after 10s
+          } else {
+            setConnectionStatus('connected');
+          }
         } else if (chunk.type === 'error') {
+          setConnectionStatus('offline');
           toast.error(chunk.message || 'Stream error');
           setMessages(prev => {
             const newArr = [...prev];
@@ -124,6 +134,7 @@ const Meera = () => {
         }
       }
     } catch (err) {
+      setConnectionStatus('offline');
       toast.error(err.message || 'Failed to connect to Meera');
       setMessages(prev => {
         const newArr = [...prev];
@@ -155,7 +166,24 @@ const Meera = () => {
           </div>
           <div>
             <h1 className="text-gpcet-text font-black text-lg tracking-wide">Meera</h1>
-            <p className="text-gpcet-muted text-[11px] font-mono tracking-wider uppercase">Powered by  Prashanth &bull; llama-3.3-70b</p>
+            <div className="flex items-center gap-2">
+              <p className="text-gpcet-muted text-[11px] font-mono tracking-wider uppercase">Powered by Groq</p>
+              <div className="flex items-center gap-1.5 ml-1">
+                 <div className={`w-2 h-2 rounded-full ${
+                   connectionStatus === 'connected' ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)] animate-pulse' : 
+                   connectionStatus === 'slow' ? 'bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.6)]' :
+                   'bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.6)]'
+                 }`}></div>
+                 <span className={`text-[9px] font-bold uppercase tracking-tighter ${
+                   connectionStatus === 'connected' ? 'text-green-500' : 
+                   connectionStatus === 'slow' ? 'text-amber-500' :
+                   'text-red-500'
+                 }`}>
+                   {connectionStatus === 'connected' ? 'AI Connected' : 
+                    connectionStatus === 'slow' ? 'AI Slow' : 'AI Offline'}
+                 </span>
+              </div>
+            </div>
           </div>
         </div>
         <button
@@ -183,6 +211,16 @@ const Meera = () => {
           </button>
         ))}
       </div>
+
+      {/* Layer 4 — Offline Banner */}
+      {connectionStatus === 'offline' && (
+        <div className="bg-red-500/10 border-b border-red-500/20 px-4 py-2 flex items-center justify-center gap-3 animate-in slide-in-from-top duration-300">
+          <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></div>
+          <p className="text-[11px] font-bold text-red-400 uppercase tracking-widest">
+            Meera is reconnecting... You can still browse your notes while we restore the connection.
+          </p>
+        </div>
+      )}
 
       {/* Context Bar */}
       <div className="py-3 px-4 sm:px-6 bg-gpcet-navbar/50 border-b border-gpcet-border shrink-0">

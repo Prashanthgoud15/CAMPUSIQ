@@ -15,10 +15,10 @@ const seedData = async () => {
 
     // STEP 1 — Clear existing data:
     await User.deleteMany({});
-    await Subject.deleteMany({});
-    await Note.deleteMany({});
-    await Session.deleteMany({});
-    console.log("Cleared existing data.");
+    // await Subject.deleteMany({}); // Preserved as per user request
+    // await Note.deleteMany({});    // Preserved as per user request
+    // await Session.deleteMany({}); // Preserved as per user request
+    console.log("Cleared existing user data.");
 
     // STEP 2 — Create admin account:
     const adminPassword = await bcrypt.hash('Admin@GPCET123', 10);
@@ -47,8 +47,14 @@ const seedData = async () => {
     });
     console.log("Created demo accounts.");
 
-    // STEP 4 & 5 — Seed ALL subjects for R23, CSE branch (all 4 years) + CAI (Year 3 Sem 2):
-    const subjects = [
+    // STEP 4 & 5 — Seed ALL subjects for R23...
+    const existingCount = await Subject.countDocuments();
+    if (existingCount > 0) {
+      console.log("Subjects already exist — skipping subject seed");
+      console.log("Use /admin/subjects page to manage subjects");
+    } else {
+      const subjects = [
+        // ... (rest of the subjects array)
       // CSE · Year 1 · Semester 1
       { branch: 'CSE', year: 1, semester: 1, regulation: 'R23', code: '23BS1101', name: 'Mathematics - I', type: 'regular', credits: 4, order: 1 },
       { branch: 'CSE', year: 1, semester: 1, regulation: 'R23', code: '23BS1102', name: 'Engineering Physics', type: 'regular', credits: 4, order: 2 },
@@ -122,24 +128,26 @@ const seedData = async () => {
       { branch: 'CAI', year: 3, semester: 2, regulation: 'R23', code: '23CA3201', name: 'Natural Language Processing', type: 'regular', credits: 4, order: 1 },
       { branch: 'CAI', year: 3, semester: 2, regulation: 'R23', code: '23CA3202', name: 'Computer Vision', type: 'regular', credits: 4, order: 2 },
       { branch: 'CAI', year: 3, semester: 2, regulation: 'R23', code: '23CA3203', name: 'Reinforcement Learning', type: 'regular', credits: 3, order: 3 },
-      { branch: 'CAI', year: 3, semester: 2, regulation: 'R23', code: 'NPTEL-CA3201', name: 'Deep Learning for Computer Vision', type: 'nptel', credits: 3, order: 4, nptel_course_url: 'https://nptel.ac.in/courses/106106184', nptel_weeks_total: 12 }
-    ];
+        { branch: 'CAI', year: 3, semester: 2, regulation: 'R23', code: 'NPTEL-CA3201', name: 'Deep Learning for Computer Vision', type: 'nptel', credits: 3, order: 4, nptel_course_url: 'https://nptel.ac.in/courses/106106184', nptel_weeks_total: 12 }
+      ];
 
-    for (let subj of subjects) {
-      await Subject.create({
-        branch: subj.branch,
-        year: subj.year,
-        semester: subj.semester,
-        regulation: subj.regulation,
-        subject_code: subj.code,
-        subject_name: subj.name,
-        type: subj.type,
-        credits: subj.credits,
-        is_theory: subj.is_theory !== false,
-        nptel_course_url: subj.nptel_course_url,
-        nptel_weeks_total: subj.nptel_weeks_total,
-        order: subj.order
-      });
+      for (let subj of subjects) {
+        await Subject.create({
+          branch: subj.branch,
+          year: subj.year,
+          semester: subj.semester,
+          regulation: subj.regulation,
+          subject_code: subj.code,
+          subject_name: subj.name,
+          type: subj.type,
+          credits: subj.credits,
+          is_theory: subj.is_theory !== false,
+          nptel_course_url: subj.nptel_course_url,
+          nptel_weeks_total: subj.nptel_weeks_total,
+          order: subj.order
+        });
+      }
+      console.log("   Subjects seeded: CSE (all 4 years), CAI (Year 3 Sem 2)");
     }
 
     console.log("✅ GPCET CampusIQ seed complete!");

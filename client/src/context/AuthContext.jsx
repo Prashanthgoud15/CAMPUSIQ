@@ -29,9 +29,19 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('user');
   };
 
+  // Used after semester update — refreshes token + user in memory & localStorage
+  const updateUser = (newUserData, newToken) => {
+    const merged = { ...user, ...newUserData };
+    setUser(merged);
+    setToken(newToken);
+    localStorage.setItem('token', newToken);
+    localStorage.setItem('user', JSON.stringify(merged));
+  };
+
   return (
-    <AuthContext.Provider value={{ user, token, login, logout, loading }}>
+    <AuthContext.Provider value={{ user, token, login, logout, updateUser, loading }}>
       {children}
     </AuthContext.Provider>
   );
 };
+

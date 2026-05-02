@@ -1,7 +1,5 @@
-const Groq = require('groq-sdk');
 const Session = require('../models/Session');
-
-const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+const groqService = require('../services/groqService');
 
 const PROMPTS = {
   'exam': `You are Meera, an AI exam preparation assistant built specifically for students at
@@ -148,12 +146,7 @@ exports.chatStream = async (req, res) => {
       { role: 'user', content: message }
     ];
 
-    const stream = await groq.chat.completions.create({
-      messages: messages,
-      model: 'llama-3.3-70b-versatile',
-      stream: true,
-      max_tokens: 3000,
-    });
+    const stream = await groqService.getGroqChatStream(messages);
 
     for await (const chunk of stream) {
       const content = chunk.choices[0]?.delta?.content || '';
@@ -176,8 +169,18 @@ exports.chatStream = async (req, res) => {
     }
 
   } catch (error) {
-    console.error('Groq API Error:', error);
-    res.write(`data: ${JSON.stringify({ type: 'error', message: error.message })}\n\n`);
+    console.error('Meera AI Final Failure:', error);
+    
+    // LAYER 1 — Better Error Messages
+    const fallbackMessage = "\n\nI'm having a brief connection issue right now. Here's what I can tell you while I reconnect:\n\n" +
+      "For your exam preparation, focus on:\n" +
+      "• Re-read the important topics from your notes\n" +
+      "• Check the previous year question papers\n" +
+      "• Review unit summaries\n\n" +
+      "Please try asking me again in 30 seconds.";
+
+    res.write(`data: ${JSON.stringify({ type: 'token', content: fallbackMessage })}\n\n`);
+    res.write(`data: ${JSON.stringify({ type: 'error', message: 'Connection issue. Showing fallback advice.' })}\n\n`);
     res.end();
   }
 };

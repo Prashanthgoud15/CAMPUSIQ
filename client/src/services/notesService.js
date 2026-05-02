@@ -5,6 +5,17 @@ export const getSubjects = async () => {
   return response.data;
 };
 
+export const browseSubjects = async (branch, year, semester) => {
+  const response = await api.get(`/subjects/browse?branch=${branch}&year=${year}&semester=${semester}`);
+  return response.data;
+};
+
+export const browseNotes = async (branch, year, semester, subjectCode) => {
+  const params = new URLSearchParams({ branch, year, semester, subject_code: subjectCode });
+  const response = await api.get(`/notes/browse?${params.toString()}`);
+  return response.data;
+};
+
 export const getAllSubjects = async (branch, year, semester) => {
   const response = await api.get(`/subjects/all?branch=${branch}&year=${year}&semester=${semester}`);
   return response.data;

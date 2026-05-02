@@ -125,3 +125,31 @@ exports.proxyPdf = async (req, res) => {
     res.status(500).json({ message: 'Failed to proxy PDF', error: error.message });
   }
 };
+
+// Browse notes — any logged-in student, any branch/year/semester
+exports.browseNotes = async (req, res) => {
+  try {
+    const { branch, year, semester, subject_code, regulation } = req.query;
+
+    if (!branch || !year || !semester || !subject_code) {
+      return res.status(400).json({ message: 'branch, year, semester and subject_code are required' });
+    }
+
+    const filter = {
+      branch,
+      year: Number(year),
+      semester: Number(semester),
+      subject_code,
+      regulation: regulation || 'R23'
+    };
+
+    const notes = await Note.find(filter)
+      .sort({ is_important: -1, created_at: -1 })
+      .populate('uploaded_by', 'display_name avatar_initials');
+
+    res.json(notes);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
