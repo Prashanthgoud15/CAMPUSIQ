@@ -10,6 +10,7 @@ import toast from 'react-hot-toast';
 const BRANCHES = ['CSE', 'CAI', 'ECE', 'EEE', 'CIVIL', 'MECH'];
 const YEARS = [1, 2, 3, 4];
 const SEMESTERS = [1, 2];
+const REGULATIONS = ['R20', 'R23', 'R25'];
 const TYPES = [
   { id: 'regular', label: 'Regular', color: 'bg-blue-500/10 text-blue-400 border-blue-500/20' },
   { id: 'nptel', label: 'NPTEL', color: 'bg-green-500/10 text-green-400 border-green-500/20' },
@@ -430,10 +431,14 @@ const AdminSubjects = () => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
                 <div className="space-y-2">
                   <label className="text-[11px] font-black uppercase tracking-widest text-gpcet-muted ml-1">Regulation</label>
-                  <input 
-                    type="text" value={formData.regulation} readOnly
-                    className="w-full bg-gpcet-bg border border-gpcet-border rounded-xl px-4 py-3 text-sm text-gray-500 font-mono shadow-inner cursor-not-allowed"
-                  />
+                  <select 
+                    name="regulation" required
+                    value={formData.regulation}
+                    onChange={handleInputChange}
+                    className="w-full bg-gpcet-bg border border-gpcet-border rounded-xl px-4 py-3 text-sm text-gpcet-text focus:ring-2 focus:ring-gpcet-primary outline-none shadow-inner"
+                  >
+                    {REGULATIONS.map(r => <option key={r} value={r}>{r}</option>)}
+                  </select>
                 </div>
                 <div className="space-y-2">
                   <label className="text-[11px] font-black uppercase tracking-widest text-gpcet-muted ml-1 flex items-center gap-1.5">

@@ -117,7 +117,7 @@ const Dashboard = () => {
             </div>
             <p className="text-indigo-200 font-medium mb-1">Ask Meera</p>
             <h3 className="text-4xl font-black text-gpcet-text tracking-tight mb-2">AI Ready</h3>
-            <p className="text-[10px] uppercase tracking-wider text-gpcet-accent/80 font-bold bg-gpcet-bg inline-block px-3 py-1 rounded-full border border-gpcet-border shadow-inner">Groq llama3-70b &bull; Streaming</p>
+            <p className="text-[10px] uppercase tracking-wider text-gpcet-accent/80 font-bold bg-gpcet-bg inline-block px-3 py-1 rounded-full border border-gpcet-border shadow-inner">AI Tutor &bull; Real-time Streaming</p>
           </div>
         </div>
       </div>

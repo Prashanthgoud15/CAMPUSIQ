@@ -2,6 +2,7 @@ const User = require('../models/User');
 const Session = require('../models/Session');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const emailService = require('../services/emailService');
 
 exports.login = async (req, res) => {
   try {
@@ -62,7 +63,7 @@ exports.login = async (req, res) => {
 
 exports.register = async (req, res) => {
   try {
-    const { display_name, email, password, roll_number, branch, year, semester } = req.body;
+    const { display_name, email, password, roll_number, branch, year, semester, regulation } = req.body;
 
     // Check if email already exists
     const existingEmail = await User.findOne({ email });
@@ -90,8 +91,11 @@ exports.register = async (req, res) => {
       year: parseInt(year),
       semester: parseInt(semester),
       role: 'student',
-      regulation: 'R23'
+      regulation: regulation || 'R23'
     });
+
+    // Send the welcome email asynchronously
+    emailService.sendWelcomeEmail(newUser);
 
     // Generate tokens (Same as login)
     const payload = {

@@ -11,7 +11,7 @@ const Sidebar = () => {
   const handleLogout = async () => {
     try {
       await logoutService();
-    } catch(err) {
+    } catch (err) {
       console.error(err);
     }
     logout();
@@ -19,17 +19,15 @@ const Sidebar = () => {
   };
 
   const navItemClass = ({ isActive }) =>
-    `flex items-center gap-3 px-4 py-3 mx-2 my-1 rounded-lg transition-all ${
-      isActive
-        ? 'bg-blue-500/10 text-blue-400 border-l-4 border-blue-500'
-        : 'text-gpcet-muted hover:bg-gpcet-bg hover:text-gpcet-text border-l-4 border-transparent'
+    `flex items-center gap-3 px-4 py-3 mx-2 my-1 rounded-lg transition-all ${isActive
+      ? 'bg-blue-500/10 text-blue-400 border-l-4 border-blue-500'
+      : 'text-gpcet-muted hover:bg-gpcet-bg hover:text-gpcet-text border-l-4 border-transparent'
     }`;
 
   const adminNavClass = ({ isActive }) =>
-    `flex items-center gap-3 px-4 py-3 mx-2 my-1 rounded-lg transition-all ${
-      isActive
-        ? 'bg-amber-500/10 text-amber-400 border-l-4 border-amber-500'
-        : 'text-gpcet-muted hover:bg-gpcet-bg hover:text-gpcet-text border-l-4 border-transparent'
+    `flex items-center gap-3 px-4 py-3 mx-2 my-1 rounded-lg transition-all ${isActive
+      ? 'bg-amber-500/10 text-amber-400 border-l-4 border-amber-500'
+      : 'text-gpcet-muted hover:bg-gpcet-bg hover:text-gpcet-text border-l-4 border-transparent'
     }`;
 
   return (
@@ -40,7 +38,7 @@ const Sidebar = () => {
           <h1 className="text-2xl font-black text-gpcet-primary tracking-tight">GPCET</h1>
           <p className="text-sm font-medium text-gpcet-accent opacity-80 mt-0.5">CampusIQ</p>
         </div>
-        
+
         <div className="px-6 mb-6">
           <div className="h-px w-full bg-gpcet-border"></div>
         </div>
@@ -129,8 +127,18 @@ const Sidebar = () => {
         </nav>
       </div>
 
-      <div className="p-6 text-center">
-        <p className="text-[11px] font-medium text-gpcet-muted">Built for GPCET · R23</p>
+      <div className="p-6 text-center space-y-1.5">
+        <p className="text-[11px] font-medium text-gpcet-muted">Built for GPCET Students</p>
+        <a
+          href="https://www.linkedin.com/in/prashanth-goud-372485294/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[11px] text-gpcet-accent/70 hover:text-gpcet-accent transition-colors font-semibold tracking-wide flex items-center justify-center gap-1 group"
+        >
+          <span>✦</span>
+          <span className="group-hover:underline underline-offset-2"> By Prashanth Goud</span>
+          <span>✦</span>
+        </a>
       </div>
     </div>
   );

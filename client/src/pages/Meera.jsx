@@ -9,17 +9,54 @@ import { AuthContext } from '../context/AuthContext';
 const MODES = [
   { id: 'exam', label: '🚨 Exam Emergency', tooltip: 'Last-minute exam prep — structured, fast, exam-focused', colorClass: 'text-red-400 bg-red-500/10 border-red-500 hover:bg-red-500/20' },
   { id: 'explainer', label: '💡 Concept Explainer', tooltip: 'Understand any concept with examples and analogies', colorClass: 'text-blue-400 bg-blue-500/10 border-blue-500 hover:bg-blue-500/20' },
-  { id: 'practice', label: '📝 Practice Mode', tooltip: 'Test yourself with viva-style questions', colorClass: 'text-green-400 bg-green-500/10 border-green-500 hover:bg-green-500/20' }
+  { id: 'practice', label: '📝 Practice Mode', tooltip: 'Test yourself with viva-style questions', colorClass: 'text-green-400 bg-green-500/10 border-green-500 hover:bg-green-500/20' },
+  { id: 'general', label: '🌐 General Chat', tooltip: 'All-rounder AI for coding, career advice, and general tasks', colorClass: 'text-gray-300 bg-gray-500/10 border-gray-500 hover:bg-gray-500/20' }
 ];
 
-const SUGGESTIONS = [
-  "Help me prepare for ML exam tomorrow",
-  "Explain CNS cryptographic algorithms",
-  "What are important SPM topics?",
-  "NPTEL Cloud Computing Week 5 summary",
-  "Explain with a real-world analogy",
-  "Quiz me on Machine Learning"
-];
+
+const getDynamicSuggestions = (mode, subjectName) => {
+  const sub = subjectName ? subjectName.trim() : "";
+  const fallbackSub = sub || "my next exam";
+
+  if (mode === 'exam') {
+    return [
+      `What are the most important topics in ${fallbackSub}?`,
+      `Give me the top 2-mark questions for ${fallbackSub}`,
+      `Outline a 10-mark answer for ${sub || 'Unit 1'}`,
+      `What's the hardest concept in ${fallbackSub}?`,
+      `Give me memory tricks for ${fallbackSub}`,
+      `Summarize the entire syllabus of ${fallbackSub}`
+    ];
+  } else if (mode === 'explainer') {
+    return [
+      `Explain a key concept from ${fallbackSub} simply`,
+      `Give me a real-world analogy for ${sub || 'the main topic'}`,
+      `What are common mistakes students make in ${fallbackSub}?`,
+      `Visualize the architecture of ${sub || 'this concept'}`,
+      `Provide a concrete example for ${fallbackSub}`,
+      `Explain ${fallbackSub} like I'm 5 years old`
+    ];
+  } else if (mode === 'practice') {
+    return [
+      `Start a hard difficulty viva for ${fallbackSub}`,
+      `Ask me a 10-mark question from ${fallbackSub}`,
+      `Quiz me on basic definitions in ${fallbackSub}`,
+      `Start a rapid-fire round for ${fallbackSub}`,
+      `Test my conceptual knowledge of ${fallbackSub}`,
+      `Give me a medium difficulty question from ${fallbackSub}`
+    ];
+  } else if (mode === 'general') {
+    return [
+      "Review my resume and suggest improvements",
+      "Draft an email to my HOD for 2 days leave",
+      "I have an interview tomorrow, give me 3 tips",
+      "Help me debug an error in my code",
+      "I'm feeling stressed about placements",
+      "Explain the latest tech industry trends"
+    ];
+  }
+  return [];
+};
 
 const Meera = () => {
   const { user } = useContext(AuthContext);
@@ -28,6 +65,8 @@ const Meera = () => {
   const [activeMode, setActiveMode] = useState('exam');
   const [subject, setSubject] = useState('');
   const [topic, setTopic] = useState('');
+
+  const currentSuggestions = getDynamicSuggestions(activeMode, subject);
 
   const [messages, setMessages] = useState([]);
   const [inputVal, setInputVal] = useState('');
@@ -167,7 +206,7 @@ const Meera = () => {
           <div>
             <h1 className="text-gpcet-text font-black text-lg tracking-wide">Meera</h1>
             <div className="flex items-center gap-2">
-              <p className="text-gpcet-muted text-[11px] font-mono tracking-wider uppercase">Powered by Groq</p>
+              <p className="text-gpcet-muted text-[11px] font-mono tracking-wider uppercase">Powered by AI</p>
               <div className="flex items-center gap-1.5 ml-1">
                  <div className={`w-2 h-2 rounded-full ${
                    connectionStatus === 'connected' ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)] animate-pulse' : 
@@ -223,35 +262,37 @@ const Meera = () => {
       )}
 
       {/* Context Bar */}
-      <div className="py-3 px-4 sm:px-6 bg-gpcet-navbar/50 border-b border-gpcet-border shrink-0">
-        <div className="flex flex-col sm:flex-row gap-3">
-          <div className="flex-1 flex gap-2 items-center bg-gpcet-card border border-gpcet-border rounded-xl px-3 py-1.5 shadow-inner focus-within:border-gpcet-accent transition-colors">
-            <span className="text-[10px] uppercase font-bold text-gray-500 whitespace-nowrap hidden lg:inline">Subject:</span>
-            <input
-              type="text"
-              value={subject}
-              onChange={e => setSubject(e.target.value)}
-              placeholder="e.g. Machine Learning, CNS"
-              className="w-full bg-transparent text-sm text-white outline-none placeholder-gray-600 font-medium"
-            />
+      {activeMode !== 'general' && (
+        <div className="py-3 px-4 sm:px-6 bg-gpcet-navbar/50 border-b border-gpcet-border shrink-0">
+          <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex-1 flex gap-2 items-center bg-gpcet-card border border-gpcet-border rounded-xl px-3 py-1.5 shadow-inner focus-within:border-gpcet-accent transition-colors">
+              <span className="text-[10px] uppercase font-bold text-gray-500 whitespace-nowrap hidden lg:inline">Subject:</span>
+              <input
+                type="text"
+                value={subject}
+                onChange={e => setSubject(e.target.value)}
+                placeholder="e.g. Machine Learning, CNS"
+                className="w-full bg-transparent text-sm text-white outline-none placeholder-gray-600 font-medium"
+              />
+            </div>
+            <div className="flex-1 flex gap-2 items-center bg-[#111827] border border-gpcet-border rounded-xl px-3 py-1.5 shadow-inner focus-within:border-gpcet-accent transition-colors">
+              <span className="text-[10px] uppercase font-bold text-gray-500 whitespace-nowrap hidden lg:inline">Topic:</span>
+              <input
+                type="text"
+                value={topic}
+                onChange={e => setTopic(e.target.value)}
+                placeholder="e.g. Neural Networks, Unit 3"
+                className="w-full bg-transparent text-sm text-white outline-none placeholder-gray-600 font-medium"
+              />
+            </div>
           </div>
-          <div className="flex-1 flex gap-2 items-center bg-[#111827] border border-gpcet-border rounded-xl px-3 py-1.5 shadow-inner focus-within:border-gpcet-accent transition-colors">
-            <span className="text-[10px] uppercase font-bold text-gray-500 whitespace-nowrap hidden lg:inline">Topic:</span>
-            <input
-              type="text"
-              value={topic}
-              onChange={e => setTopic(e.target.value)}
-              placeholder="e.g. Neural Networks, Unit 3"
-              className="w-full bg-transparent text-sm text-white outline-none placeholder-gray-600 font-medium"
-            />
+          <div className="text-center mt-2">
+            <p className="text-[9px] sm:text-[10px] text-gpcet-muted font-mono tracking-wider uppercase bg-black/20 py-1 rounded border border-white/5 inline-block px-3 shadow-inner">
+              {user?.branch || 'CSE'} &bull; Y{user?.year || '3'}S{user?.semester || '2'} &bull; Autonomous Context Applied
+            </p>
           </div>
         </div>
-        <div className="text-center mt-2">
-          <p className="text-[9px] sm:text-[10px] text-gpcet-muted font-mono tracking-wider uppercase bg-black/20 py-1 rounded border border-white/5 inline-block px-3 shadow-inner">
-            {user?.branch || 'CSE'} &bull; Y{user?.year || '3'}S{user?.semester || '2'} &bull; Autonomous Context Applied
-          </p>
-        </div>
-      </div>
+      )}
 
       {/* Chat Area */}
       <div className="flex-1 overflow-y-auto p-4 sm:p-6 custom-scrollbar scroll-smooth">
@@ -269,7 +310,7 @@ const Meera = () => {
             <p className="text-gray-400 font-medium mb-10 max-w-sm leading-relaxed text-sm">I have been configured to follow your precise R23 syllabus structure. Ask me anything.</p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
-              {SUGGESTIONS.map((sug, idx) => (
+              {currentSuggestions.map((sug, idx) => (
                 <button
                   key={idx}
                   onClick={() => handleSubmit(sug)}
@@ -362,8 +403,9 @@ const Meera = () => {
               handleInputResize();
             }}
             onKeyDown={handleKeyDown}
-            placeholder="Ask Meera anything about your GPCET syllabus... (Shift+Enter for newline)"
+            placeholder={activeMode === 'general' ? "Chat with Meera about anything... (Shift+Enter for newline)" : "Ask Meera anything about your GPCET syllabus... (Shift+Enter for newline)"}
             className="flex-1 max-h-32 min-h-[44px] bg-transparent resize-none outline-none text-gpcet-text p-3 custom-scrollbar text-base placeholder-gray-600 leading-relaxed"
+
             rows={1}
             disabled={isStreaming}
           />

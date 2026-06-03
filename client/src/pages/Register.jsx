@@ -13,6 +13,7 @@ const Register = () => {
     branch: '',
     year: '',
     semester: '',
+    regulation: '',
     password: '',
     confirmPassword: ''
   });
@@ -37,6 +38,7 @@ const Register = () => {
     if (!formData.branch) newErrors.branch = 'Branch is required';
     if (!formData.year) newErrors.year = 'Year is required';
     if (!formData.semester) newErrors.semester = 'Semester is required';
+    if (!formData.regulation) newErrors.regulation = 'Regulation is required';
     if (!formData.password) {
       newErrors.password = 'Password is required';
     } else if (formData.password.length < 6) {
@@ -262,6 +264,26 @@ const Register = () => {
                   </select>
                 </div>
                 {errors.semester && <p className="text-red-500 text-[10px] mt-1.5 ml-1 font-bold">{errors.semester}</p>}
+              </div>
+
+              {/* Regulation */}
+              <div>
+                <label className="block text-[10px] font-black text-gray-500 uppercase tracking-[0.1em] mb-2 ml-1">Regulation</label>
+                <div className="relative group">
+                  <BookOpen className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-600 transition-colors group-focus-within:text-gpcet-primary" size={16} />
+                  <select
+                    name="regulation"
+                    value={formData.regulation}
+                    onChange={handleChange}
+                    className={`w-full bg-gpcet-bg border ${errors.regulation ? 'border-red-500/50' : 'border-gpcet-border'} rounded-xl py-3 pl-12 pr-4 text-gpcet-text appearance-none focus:ring-2 focus:ring-gpcet-primary/50 outline-none transition-all text-sm`}
+                  >
+                    <option value="" disabled>Select Regulation</option>
+                    <option value="R20">R20</option>
+                    <option value="R23">R23</option>
+                    <option value="R25">R25</option>
+                  </select>
+                </div>
+                {errors.regulation && <p className="text-red-500 text-[10px] mt-1.5 ml-1 font-bold">{errors.regulation}</p>}
               </div>
 
               {/* Password */}
