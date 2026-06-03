@@ -64,31 +64,6 @@ Built for production deployment with stringent security measures.
 
 ---
 
-## 🛠️ Quick Start (Local Development)
-
-*Note: Environment variables (.env) are required to run this project. They are kept private for security.*
-
-**1. Clone the repository**
-```bash
-git clone https://github.com/Prashanthgoud15/gpcet-campusiq.git
-```
-
-**2. Start the Backend**
-```bash
-cd server
-npm install
-npm run dev
-```
-
-**3. Start the Frontend**
-```bash
-cd client
-npm install
-npm run dev
-```
-
----
-
 ## 👨‍💻 Author
 
 **G. Prashanth Goud**  
